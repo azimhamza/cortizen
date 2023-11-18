@@ -6,6 +6,10 @@
 	<string>Showing Dispatcher what the user is seeing.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Provide Audio feedback to dispatcher</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app needs your health data to send it to first responders.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+  <string>This app will write data to your health profile to keep it up to date.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location when open.</string>
 	<key>NSLocationAlwaysUsageDescription</key>

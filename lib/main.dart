@@ -1,15 +1,16 @@
 import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
+
 import 'package:protizen/features/screens/home.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
+import 'features/location.dart';
+import 'features/movement.dart';
+import 'features/health.dart';
+import 'features/twilio.dart';
+  
 List<CameraDescription> cameras = [];
 
 
 final supabase = Supabase.instance.client;
-
-
-
 
 
 Future main() async {
@@ -51,6 +52,35 @@ Future<void> testSupabaseClient() async {
     if (response != null) {
       throw response!;
     }
+  void initState() {
+    super.initState();
+    print('initState is being called');
+    getCurrentLocation();
+    isPhoneMoving().then((isMoving) {
+      print('isPhoneMoving completed');
+      if (isMoving) {
+        print('Phone is moving');
+      } else {
+        print('Phone is not moving');
+      }
+    }).catchError((error) {
+      print('An error occurred: $error');
+    });
+    getHealthData();
+  }
+
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
+
+    // sendTextMessage('+12898284206', '911 Emergency\n 123 Main St.\n San Francisco, CA 94103\n 37.7749° N, 122.4194° W\n Link for more details');
+  }
 
     print('Supabase client is working: ${response.data}');
   } catch (e) {
