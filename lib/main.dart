@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'features/location.dart';
+import 'features/movement.dart';
+import 'features/health.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +62,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void initState() {
     super.initState();
-    _getCurrentLocation();
+    print('initState is being called');
+    getCurrentLocation();
+    isPhoneMoving().then((isMoving) {
+      print('isPhoneMoving completed');
+      if (isMoving) {
+        print('Phone is moving');
+      } else {
+        print('Phone is not moving');
+      }
+    }).catchError((error) {
+      print('An error occurred: $error');
+    });
+    getHealthData();
   }
 
   void _incrementCounter() {
@@ -72,22 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
-  }
-
-  void _getCurrentLocation() async {
-    LocationPermission permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.deniedForever) {
-      // Handle the case where permission is permanently denied.
-      return;
-    }
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission != LocationPermission.whileInUse && permission != LocationPermission.always) {
-        return;
-      }
-    }
-    Position position = await Geolocator.getCurrentPosition();
-    print('Current position is ${position.latitude}, ${position.longitude}');
   }
 
   @override
