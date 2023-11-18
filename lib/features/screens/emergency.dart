@@ -2,18 +2,22 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:protizen/constant/color.dart';
+import 'package:protizen/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 class CameraPage extends StatefulWidget {
   final CameraDescription camera;
 
-  const CameraPage({Key? key, required this.camera}) : super(key: key);
+  CameraPage({Key? key, required this.camera}) : super(key: key);
 
   @override
   CameraPageState createState() => CameraPageState();
 }
 
 class CameraPageState extends State<CameraPage> {
+
+
+
+
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
   final TextEditingController _chatController = TextEditingController();
@@ -44,16 +48,12 @@ class CameraPageState extends State<CameraPage> {
     final fileName =
         'uploads/${DateTime.now().millisecondsSinceEpoch}_${photo.name}';
 
-    final response = await Supabase.instance.client.storage
-        .from('protizen')
-        .upload(fileName, file);
-
-    if (response == null) {
-      print('Upload error: ${response}');
-    } else {
-      // Handle upload error
-    }
+    await supabase.storage.from('protizen').upload(
+      fileName,
+      file
+    );
   }
+
 
   void sendMessage() async {
     if (_chatController.text.isNotEmpty) {
