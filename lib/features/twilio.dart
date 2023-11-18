@@ -1,5 +1,6 @@
 // lib/features/twilio.dart
 import 'package:twilio_flutter/twilio_flutter.dart';
+import 'package:twilio_voice/twilio_voice.dart';
 
 void sendTextMessage(String toNumber, String messageBody) async {
   TwilioFlutter twilioFlutter = TwilioFlutter(
@@ -11,5 +12,13 @@ void sendTextMessage(String toNumber, String messageBody) async {
   await twilioFlutter.sendSMS(
     toNumber: toNumber,
     messageBody: messageBody,
+  );
+}
+
+Future<void> makePhoneCall(String toNumber) async {
+  TwilioVoice twilioVoice = TwilioVoice();
+
+  await twilioVoice.call(
+    toNumber: toNumber,
   );
 }

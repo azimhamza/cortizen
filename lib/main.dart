@@ -88,7 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
 
-    sendTextMessage('+12898284206', '911 Emergency\n 123 Main St.\n San Francisco, CA 94103\n 37.7749° N, 122.4194° W\n Link for more details');
+    // sendTextMessage('+12898284206', '911 Emergency\n 295 Hagey Blvd.\n Waterloo, ON N2L 6R5\n 43.4772° N, 80.5495° W\n This link contains more details');
+    makePhoneCall('+12898284206');
   }
 
   @override
