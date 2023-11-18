@@ -63,19 +63,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void initState() {
     super.initState();
-    print('initState is being called');
-    getCurrentLocation();
-    isPhoneMoving().then((isMoving) {
-      print('isPhoneMoving completed');
-      if (isMoving) {
-        print('Phone is moving');
-      } else {
-        print('Phone is not moving');
-      }
-    }).catchError((error) {
-      print('An error occurred: $error');
-    });
-    getHealthData();
+    final healthData = await getHealthData();
+    final locationData = await getCurrentLocation();
+    final movementData = await isPhoneMoving();
+
+    final supabaseService = SupabaseService(client);
+
+    final incidentData = {
+      'health': healthData,
+      'location': locationData,
+      'movement': movementData,
+    };
+
+    await supabaseService.sendData(incidentData);
   }
 
   void _incrementCounter() {
