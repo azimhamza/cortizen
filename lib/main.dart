@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'features/location.dart';
 import 'features/movement.dart';
 import 'features/health.dart';
+import 'features/twilio.dart';
 
 void main() {
   runApp(const MyApp());
@@ -86,6 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+
+    sendTextMessage('+12898284206', '911 Emergency\n 123 Main St.\n San Francisco, CA 94103\n 37.7749° N, 122.4194° W\n Link for more details');
   }
 
   @override
