@@ -41,6 +41,7 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   flutter_dotenv: ^5.1.0
   flutter_sms: ^2.3.3
+  device_info_plus: ^9.1.0
 
 dev_dependencies:
   flutter_test:
