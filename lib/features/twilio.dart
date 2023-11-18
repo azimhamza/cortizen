@@ -1,5 +1,7 @@
 // lib/features/twilio.dart
 import 'package:twilio_flutter/twilio_flutter.dart';
+import 'package:twilio_voice/twilio_voice.dart';
+
 
 void sendTextMessage(String toNumber, String messageBody) async {
   TwilioFlutter twilioFlutter = TwilioFlutter(
@@ -12,4 +14,21 @@ void sendTextMessage(String toNumber, String messageBody) async {
     toNumber: toNumber,
     messageBody: messageBody,
   );
+}
+
+Future<void> makeCall(String toNumber) async {
+  var url = Uri.parse('http://localhost:5000/make_call');
+  try {
+    var response = await http.post(
+      url,
+      body: {'to_number': toNumber},
+    );
+    if (response.statusCode == 200) {
+      print('Call initiated: ${response.body}');
+    } else {
+      print('Failed to make call: ${response.statusCode}, ${response.body}');
+    }
+  } catch (e) {
+    print('Error making call: $e');
+  }
 }
