@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     // sendTextMessage('+12898284206', '911 Emergency\n 295 Hagey Blvd.\n Waterloo, ON N2L 6R5\n 43.4772° N, 80.5495° W\n This link contains more details');
-    makeCall();
+    makeCall('+12898284206');
   }
 
   @override

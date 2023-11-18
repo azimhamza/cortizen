@@ -18,18 +18,22 @@ void sendTextMessage(String toNumber, String messageBody) async {
 }
 
 
-Future<void> makeCall() async {
+Future<void> makeCall(String toNumber) async {
+  var url = Uri.parse('http://localhost:5000/make_call');
   try {
-    var url = Uri.parse('http://localhost:5000/make_call');
-    var response = await http.get(url);
+    var response = await http.post(
+      url,
+      body: {'to_number': toNumber},
+    );
     if (response.statusCode == 200) {
       print('Call initiated: ${response.body}');
     } else {
-      print('Failed to make call: ${response.body}');
+      print('Failed to make call: ${response.statusCode}, ${response.body}');
     }
   } catch (e) {
-    print(e.toString());
+    print('Error making call: $e');
   }
 }
+
 
 
