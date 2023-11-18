@@ -43,6 +43,7 @@ dependencies:
   flutter_sms: ^2.3.3
   device_info_plus: ^9.1.0
   supabase_flutter: ^1.10.25
+  twilio_flutter: ^0.0.9
 
 dev_dependencies:
   flutter_test:
