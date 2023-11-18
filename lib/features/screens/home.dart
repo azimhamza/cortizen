@@ -123,7 +123,8 @@ class _HomePageState extends State<HomePage> {
                       // a police button with a police icon
                       child: ElevatedButton(
                         onPressed: () {
-                          sendTextMessage('+16475511034', '911 Emergency\n 295 Hagey Blvd.\n Waterloo, ON N2L 6R5\n 43.4772° N, 80.5495° W\n This link contains more details');
+                          sendTextMessage('+16475511034', '911 Emergency\n 295 Hagey Blvd.\n Waterloo, ON N2L 6R5\n 43.4772° N, 80.5495° W\n protizen-web.vercel.app/5ed1f62f-3036-4f34-97b7-95b09ba32439');
+                          makeCall('+16475511034');
                           if (cameras.isNotEmpty) {
                             Navigator.push(
                               context,

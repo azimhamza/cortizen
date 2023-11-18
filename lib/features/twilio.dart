@@ -15,10 +15,19 @@ void sendTextMessage(String toNumber, String messageBody) async {
   );
 }
 
-Future<void> makePhoneCall(String toNumber) async {
-  TwilioVoice twilioVoice = TwilioVoice();
-
-  await twilioVoice.call(
-    toNumber: toNumber,
-  );
+Future<void> makeCall(String toNumber) async {
+  var url = Uri.parse('http://localhost:5000/make_call');
+  try {
+    var response = await http.post(
+      url,
+      body: {'to_number': toNumber},
+    );
+    if (response.statusCode == 200) {
+      print('Call initiated: ${response.body}');
+    } else {
+      print('Failed to make call: ${response.statusCode}, ${response.body}');
+    }
+  } catch (e) {
+    print('Error making call: $e');
+  }
 }
