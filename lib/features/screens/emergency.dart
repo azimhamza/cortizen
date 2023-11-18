@@ -41,14 +41,15 @@ class CameraPageState extends State<CameraPage> {
 
   Future<void> uploadPhoto(XFile photo) async {
     final file = File(photo.path);
-    final fileName = 'uploads/${DateTime.now().millisecondsSinceEpoch}_${photo.name}';
+    final fileName =
+        'uploads/${DateTime.now().millisecondsSinceEpoch}_${photo.name}';
 
     final response = await Supabase.instance.client.storage
         .from('protizen')
         .upload(fileName, file);
 
     if (response == null) {
-    print('Upload error: ${response}');
+      print('Upload error: ${response}');
     } else {
       // Handle upload error
     }
@@ -59,8 +60,7 @@ class CameraPageState extends State<CameraPage> {
       // Send message to Supabase
       final response = await Supabase.instance.client
           .from('chat_messages')
-          .insert({'message': _chatController.text})
-          .execute();
+          .insert({'message': _chatController.text}).execute();
 
       if (response == null) {
         setState(() {
@@ -73,78 +73,81 @@ class CameraPageState extends State<CameraPage> {
     }
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(title: const Text('Camera View')),
-    body: FutureBuilder<void>(
-      future: _initializeControllerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Column(
-            children: <Widget>[
-              Expanded(child: CameraPreview(_controller)),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.3, // Adjusted for more space
-                padding: const EdgeInsets.all(8),
-                color: Colors.black54,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded( // This will make the ListView take all available space
-                      child: ListView.builder(
-                        reverse: true, // This will start the list from the bottom
-                        itemCount: messages.length,
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: Text(messages[messages.length - 1 - index], // Reverse the message order
-                              style: const TextStyle(color: Colors.white)),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _chatController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
-                              hintText: "Type a message",
-                              hintStyle: TextStyle(color: Colors.white),
-                            ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Camera View')),
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Column(
+              children: <Widget>[
+                Expanded(child: CameraPreview(_controller)),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height *
+                      0.3, // Adjusted for more space
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.black54,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        // This will make the ListView take all available space
+                        child: ListView.builder(
+                          reverse:
+                              true, // This will start the list from the bottom
+                          itemCount: messages.length,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Text(
+                                messages[messages.length -
+                                    1 -
+                                    index], // Reverse the message order
+                                style: const TextStyle(color: Colors.white)),
                           ),
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.send, color: Colors.white),
-                          onPressed: sendMessage,
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: _chatController,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
+                                hintText: "Type a message",
+                                hintStyle: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.send, color: Colors.white),
+                            onPressed: sendMessage,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
-    ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: takePhoto,
-      child: const Icon(Icons.camera_alt),
-      backgroundColor: primaryYellow,
-      elevation: 0,
-      mini: true,
-      tooltip: 'Take a photo',
-    ),
-    floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-  );
-}
-
-
-
+              ],
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: takePhoto,
+        child: const Icon(Icons.camera_alt),
+        backgroundColor: primaryYellow,
+        elevation: 0,
+        mini: true,
+        tooltip: 'Take a photo',
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+    );
+  }
 
   @override
   void dispose() {

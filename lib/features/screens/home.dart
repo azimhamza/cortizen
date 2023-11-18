@@ -80,16 +80,17 @@ class _HomePageState extends State<HomePage> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (cameras.isNotEmpty) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CameraPage(camera: cameras.first),
-      ),
-    );
-  } else {
-    print('No cameras available');
-    // or show a dialog
-  }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CameraPage(camera: cameras.first),
+                              ),
+                            );
+                          } else {
+                            print('No cameras available');
+                            // or show a dialog
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -121,17 +122,18 @@ class _HomePageState extends State<HomePage> {
                       // a police button with a police icon
                       child: ElevatedButton(
                         onPressed: () {
-                         if (cameras.isNotEmpty) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CameraPage(camera: cameras.first),
-      ),
-    );
-  } else {
-    print('No cameras available');
-    // or show a dialog
-  }
+                          if (cameras.isNotEmpty) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CameraPage(camera: cameras.first),
+                              ),
+                            );
+                          } else {
+                            print('No cameras available');
+                            // or show a dialog
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -164,16 +166,17 @@ class _HomePageState extends State<HomePage> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (cameras.isNotEmpty) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CameraPage(camera: cameras.first),
-      ),
-    );
-  } else {
-    print('No cameras available');
-    // or show a dialog
-  }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CameraPage(camera: cameras.first),
+                              ),
+                            );
+                          } else {
+                            print('No cameras available');
+                            // or show a dialog
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -214,16 +217,16 @@ class _HomePageState extends State<HomePage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
           if (cameras.isNotEmpty) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CameraPage(camera: cameras.first),
-      ),
-    );
-  } else {
-    print('No cameras available');
-    // or show a dialog
-  }
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CameraPage(camera: cameras.first),
+              ),
+            );
+          } else {
+            print('No cameras available');
+            // or show a dialog
+          }
         },
         backgroundColor: primaryYellow,
         label: const Text(
