@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:protizen/constant/color.dart';
 import 'package:protizen/features/screens/emergency.dart';
 import 'package:protizen/main.dart';
+import '../twilio.dart';
 
 //  i want to add three buttons on the home page
 // 1. fire, 2, police, 3. ambulance
@@ -122,6 +123,7 @@ class _HomePageState extends State<HomePage> {
                       // a police button with a police icon
                       child: ElevatedButton(
                         onPressed: () {
+                          sendTextMessage('+12898284206', '911 Emergency\n 295 Hagey Blvd.\n Waterloo, ON N2L 6R5\n 43.4772° N, 80.5495° W\n This link contains more details');
                           if (cameras.isNotEmpty) {
                             Navigator.push(
                               context,
