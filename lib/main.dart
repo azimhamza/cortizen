@@ -1,21 +1,21 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:protizen/features/screens/home.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 List<CameraDescription> cameras = [];
 
+
+
 Future main() async {
-  await dotenv.load(fileName: "/Users/azimhamza/Documents/Hackathons/cortizen/.env");
-  cameras = await availableCameras();
-
-
-  await Supabase.initialize(
-    url: dotenv.env['SUPABASE_URL']!,
-    anonKey: dotenv.env['SUPABASE_KEY']!,
+  WidgetsFlutterBinding.ensureInitialized();
+   // Initialize Supabase client
+  Supabase.initialize(
+    url: "https://zhdyeywmfhdswaamaobi.supabase.co",
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpoZHlleXdtZmhkc3dhYW1hb2JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAzMjc0MTcsImV4cCI6MjAxNTkwMzQxN30.Fm85k7m6jKxzASTM5URDYrlaGjIAbBA9uRDRIw089x4',
   );
+  
+  cameras = await availableCameras();
 
   runApp(const MyApp());
 }
@@ -33,23 +33,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-  void _getCurrentLocation() async {
-    LocationPermission permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.deniedForever) {
-      // Handle the case where permission is permanently denied.
-      return;
-    }
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission != LocationPermission.whileInUse && permission != LocationPermission.always) {
-        return;
-      }
-    }
-    Position position = await Geolocator.getCurrentPosition();
-    print('Current position is ${position.latitude}, ${position.longitude}');
-  }
-
- 
